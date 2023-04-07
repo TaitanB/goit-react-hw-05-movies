@@ -1,5 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import css from './SharedLayout.module.css';
+import { MdLocalMovies } from 'react-icons/md';
+import { FaHome } from 'react-icons/fa';
 
 export const SharedLayout = () => {
   let activeClassName = {
@@ -7,29 +10,23 @@ export const SharedLayout = () => {
   };
 
   return (
-    <div
-      style={{
-        // height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: '16px',
-        color: '#010101',
-      }}
-    >
-      <header>
-        <nav>
+    <div className={css.container}>
+      <header className={css.header}>
+        <nav className={css.nav}>
           <NavLink
             to="/"
+            className={css.navlink}
             style={({ isActive }) => (isActive ? activeClassName : undefined)}
           >
+            <FaHome />
             Home
           </NavLink>
           <NavLink
             to="/movies"
+            className={css.navlink}
             style={({ isActive }) => (isActive ? activeClassName : undefined)}
           >
+            <MdLocalMovies />
             Movies
           </NavLink>
         </nav>

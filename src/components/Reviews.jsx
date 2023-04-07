@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from './api.js';
+import css from '../pages/MovieDetails.module.css';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -8,21 +9,22 @@ export const Reviews = () => {
 
   useEffect(() => {
     fetchMovieReviews(movieId).then(movie => {
-      console.log(`fetchMovieCredits ${movie.results}`);
+      // console.log(`fetchMovieCredits ${movie.results}`);
       setReviews(movie.results);
     });
   }, [movieId]);
 
-  if (!reviews) {
+  if (reviews.length === 0) {
     return <p>We don't have any reviews for this movie.</p>;
   }
   return (
     <>
-      <ul>
+      <ul className={css.review}>
         {reviews.map(review => (
           <li key={review.id}>
-            <p>{review.author}</p>
+            <b>{review.author}</b>
             <p>{review.content}</p>
+            <hr />
           </li>
         ))}
       </ul>

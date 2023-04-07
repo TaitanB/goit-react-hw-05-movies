@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTrendingMovies } from '../components/api';
 import { MoviesList } from '../components/MoviesList';
+import css from '../components/SharedLayout.module.css';
 
 export const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -16,7 +17,7 @@ export const Home = () => {
 
   return (
     <>
-      <h1>Trending today</h1>
+      <h1 className={css.title}>Trending today</h1>
       <MoviesList movies={trendingMovies} />
     </>
   );

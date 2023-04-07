@@ -9,7 +9,7 @@ export const fetchTrendingMovies = async () => {
     const data = await response.json();
     return data.results;
   } catch (error) {
-    console.error(`ERROR: ${error}`);
+    // console.error(`ERROR: ${error}`);
     alert('Щось пішло не так... Будь ласка, спробуйте ще раз пізніше.');
     throw error;
   }
@@ -23,7 +23,7 @@ export const fetchSearchMovies = async query => {
     const data = await response.json();
     return data.results;
   } catch (error) {
-    console.error(`ERROR: ${error}`);
+    // console.error(`ERROR: ${error}`);
     alert('Щось пішло не так... Будь ласка, спробуйте ще раз пізніше.');
     throw error;
   }
@@ -37,7 +37,7 @@ export const fetchMovie = async movie_id => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(`ERROR: ${error}`);
+    // console.error(`ERROR: ${error}`);
     alert('Щось пішло не так... Будь ласка, спробуйте ще раз пізніше.');
     throw error;
   }
@@ -51,7 +51,7 @@ export const fetchMovieCredits = async movie_id => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(`ERROR: ${error}`);
+    // console.error(`ERROR: ${error}`);
     alert('Щось пішло не так... Будь ласка, спробуйте ще раз пізніше.');
     throw error;
   }
@@ -65,7 +65,7 @@ export const fetchMovieReviews = async movie_id => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     alert('Щось пішло не так... Будь ласка, спробуйте ще раз пізніше.');
     throw error;
   }

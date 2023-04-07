@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from '../components/api';
 import { MoviesList } from '../components/MoviesList';
+import css from '../components/SharedLayout.module.css';
 
 export const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,18 +14,18 @@ export const Movies = () => {
 
   useEffect(() => {
     if (!searchQuery) {
-      console.log('Поле пошуку порожнє');
+      // console.log('Поле пошуку порожнє');
       return;
     }
 
     const fetchsearchQuery = () => {
       fetchSearchMovies(searchQuery).then(movies => {
-        console.log(`fetchSearchMovies ${movies}`);
+        // console.log(`fetchSearchMovies ${movies}`);
         if (movies.length !== 0) {
           setMovies(movies);
         } else {
-          console.log('Нічого не знайдено');
-          alert('Нічого не знайдено');
+          // console.log('Нічого не знайдено');
+          alert('Nothing found.');
           setQuery('');
         }
       });
@@ -37,11 +38,11 @@ export const Movies = () => {
     event.preventDefault();
 
     if (query !== '') {
-      console.log('Запит валідний');
-      console.log(query);
+      // console.log('Запит валідний');
+      // console.log(query);
       setSearchParams({ query: `${query}` });
     } else {
-      console.log('Запит не валідний');
+      // console.log('Запит не валідний');
       alert('Please enter a valid value.');
       return;
     }
@@ -54,9 +55,10 @@ export const Movies = () => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className={css.form}>
         <label>
           <input
+            className={css.input}
             type="text"
             autoComplete="off"
             autoFocus
@@ -64,7 +66,9 @@ export const Movies = () => {
             value={query}
             onChange={handleChange}
           />
-          <button type="submit">Search</button>
+          <button type="submit" className={css.btn}>
+            Search
+          </button>
         </label>
       </form>
 
