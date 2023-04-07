@@ -1,15 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
+import {
+  NavLink,
+  Outlet,
+  useParams,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { fetchMovie } from '../components/api';
 
 export const MovieDetails = () => {
+  const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
-  console.log(location.state);
-  const backLinkHref = location.state?.from ?? `/movies`;
-
+  const navigate = useNavigate();
+  console.log(location);
   console.log(movieId);
-  const [movie, setMovie] = useState(null);
+
+  let activeClassName = {
+    color: 'red',
+  };
+
+  const handleClick = () => navigate(location?.state?.from ?? '/');
 
   useEffect(() => {
     fetchMovie(movieId).then(movieData => {
@@ -18,13 +29,14 @@ export const MovieDetails = () => {
   }, [movieId]);
 
   console.log(movie);
+
   if (!movie) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
-      <Link to={backLinkHref}>Go back</Link>
+      <button onClick={handleClick}>Go back</button>
       <div>
         <img
           src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
@@ -40,12 +52,25 @@ export const MovieDetails = () => {
         <p>Additional information</p>
         <ul>
           <li>
-            <Link to="cast">Cast</Link>
+            <NavLink
+              to="cast"
+              style={({ isActive }) => (isActive ? activeClassName : undefined)}
+              state={location.state}
+            >
+              Cast
+            </NavLink>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <NavLink
+              to="reviews"
+              style={({ isActive }) => (isActive ? activeClassName : undefined)}
+              state={location.state}
+            >
+              Reviews
+            </NavLink>
           </li>
         </ul>
+        <hr />
         <Outlet />
       </div>
     </>

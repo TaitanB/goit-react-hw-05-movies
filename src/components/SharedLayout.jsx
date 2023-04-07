@@ -2,6 +2,10 @@ import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 export const SharedLayout = () => {
+  let activeClassName = {
+    color: 'red',
+  };
+
   return (
     <div
       style={{
@@ -16,8 +20,18 @@ export const SharedLayout = () => {
     >
       <header>
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/movies">Movies</NavLink>
+          <NavLink
+            to="/"
+            style={({ isActive }) => (isActive ? activeClassName : undefined)}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/movies"
+            style={({ isActive }) => (isActive ? activeClassName : undefined)}
+          >
+            Movies
+          </NavLink>
         </nav>
       </header>
       <Outlet />
