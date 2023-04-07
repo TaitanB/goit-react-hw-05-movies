@@ -25,6 +25,7 @@ export const Movies = () => {
         } else {
           console.log('Нічого не знайдено');
           alert('Нічого не знайдено');
+          setQuery('');
         }
       });
     };
