@@ -45,7 +45,11 @@ const MovieDetails = () => {
       </button>
       <div className={css.movie_container}>
         <img
-          src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+              : 'https://via.placeholder.com/185x278.png?text=No+Image'
+          }
           alt="movie poster"
         />
         <div className={css.movie_info}>
