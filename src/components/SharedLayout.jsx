@@ -1,10 +1,11 @@
-import { Outlet } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-import css from './SharedLayout.module.css';
+import { Suspense } from 'react';
+import { Outlet, NavLink } from 'react-router-dom';
 import { MdLocalMovies } from 'react-icons/md';
 import { FaHome } from 'react-icons/fa';
 
-export const SharedLayout = () => {
+import css from './SharedLayout.module.css';
+
+const SharedLayout = () => {
   let activeClassName = {
     color: 'red',
   };
@@ -31,7 +32,11 @@ export const SharedLayout = () => {
           </NavLink>
         </nav>
       </header>
-      <Outlet />
+      <Suspense fallback={<b>Loading...</b>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
+
+export default SharedLayout;

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useLocation, useSearchParams, Outlet } from 'react-router-dom';
+
 import { fetchSearchMovies } from '../components/api';
-import { MoviesList } from '../components/MoviesList';
+import MoviesList from '../components/MoviesList';
 import css from '../components/SharedLayout.module.css';
 
-export const Movies = () => {
+const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -71,8 +72,18 @@ export const Movies = () => {
           </button>
         </label>
       </form>
-
-      <MoviesList movies={movies} prevLocation={location} />
+      <Suspense fallback={<b>Loading...</b>}>
+        {movies.length === 0 ? (
+          <b>There are no movies here yet.</b>
+        ) : (
+          <MoviesList movies={movies} prevLocation={location} />
+        )}
+      </Suspense>
+      <Suspense fallback={<b>Loading...</b>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
+
+export default Movies;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import {
   NavLink,
   Outlet,
@@ -6,11 +6,12 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom';
+
 import { fetchMovie } from '../components/api';
 import { TiArrowLeftThick } from 'react-icons/ti';
 import css from './MovieDetails.module.css';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
@@ -55,7 +56,6 @@ export const MovieDetails = () => {
           <h3>Genres</h3>
           <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
         </div>
-
         <div className={css.movie_info}>
           <b>Additional information</b>
           <ul>
@@ -84,7 +84,11 @@ export const MovieDetails = () => {
           </ul>
         </div>
       </div>
-      <Outlet />
+      <Suspense fallback={<b>Loading...</b>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
+
+export default MovieDetails;

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
 import { fetchTrendingMovies } from '../components/api';
-import { MoviesList } from '../components/MoviesList';
+import MoviesList from '../components/MoviesList';
 import css from '../components/SharedLayout.module.css';
 
-export const Home = () => {
+const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
@@ -22,3 +23,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default Home;

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { fetchMovieCredits } from './api.js';
 import css from '../pages/MovieDetails.module.css';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [movieCast, setMovieCast] = useState([]);
 
@@ -13,6 +14,10 @@ export const Cast = () => {
       setMovieCast(movie.cast);
     });
   }, [movieId]);
+
+  if (movieCast.length === 0) {
+    return <p>No information about the cast was found.</p>;
+  }
 
   return (
     <ul className={css.cast}>
@@ -33,3 +38,5 @@ export const Cast = () => {
     </ul>
   );
 };
+
+export default Cast;
