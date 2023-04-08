@@ -56,9 +56,18 @@ const MovieDetails = () => {
           <h2>{movie.title}</h2>
           <p>User score: {(movie.vote_average * 10).toFixed()}%</p>
           <h3>Overview</h3>
-          <p>{movie.overview}</p>
+          {!movie.overview ? (
+            <p>No overview information found.</p>
+          ) : (
+            <p>{movie.overview}</p>
+          )}
+
           <h3>Genres</h3>
-          <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
+          {movie.genres.length === 0 ? (
+            <p>No information on genres was found.</p>
+          ) : (
+            <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
+          )}
         </div>
         <div className={css.movie_info}>
           <b>Additional information</b>
